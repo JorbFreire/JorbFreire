@@ -15,6 +15,7 @@ alias subl="$SUBLPATH"
 alias work="cd $WORK && if [ -f $VSCODEPATH ]; then code .; else echo 'vscode not installed'; fi;"
 alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
 alias reload="source ~/.zshrc"
+alias RELOAD="source ~/.zshrc"
 
 alias view="wslview"
 alias display="wslview"
