@@ -2,11 +2,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # environment variables
-export WORK="$HOME/code/freelance/my-work"
-export SEA="$HOME/code/seaside/dome_front"
-export DS="$HOME/code/studies/DataStructsStudies"
-export TEST="$HOME/code/"
-
 export SUBLPATH="/mnt/c/Program\ Files/Sublime\ Text/sublime_text.exe"
 export VSCODEPATH="/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 export SRCDIRASREMOTE="//wsl$/Ubuntu/home/$USER/.zshrc"
