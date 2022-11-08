@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # environment variables
 export SUBLPATH="/mnt/c/Program\ Files/Sublime\ Text/sublime_text.exe"
@@ -9,10 +9,13 @@ export SRCDIRASREMOTE="//wsl$/Ubuntu/home/$USER/.zshrc"
 # aliases
 alias mkdir="mkdir -v"
 alias rmdir="rmdir -v"
+alias python="python3"
+alias py="python3"
+alias pip='f() {if [ "$1" = "add" ]; then pip install ${@:2}; else pip $@; fi;}; f'
 
 alias code="$VSCODEPATH"
 alias subl="$SUBLPATH"
-alias work="cd $WORK && if [ -f $VSCODEPATH ]; then code .; else echo 'vscode not installed'; fi;"
+
 alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
 alias reload="source ~/.zshrc"
 alias RELOAD="source ~/.zshrc"
@@ -170,3 +173,4 @@ zinit light zsh-users/zsh-completions
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
