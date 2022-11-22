@@ -1,22 +1,5 @@
 #!/usr/bin/bash
-
-declare -A WORK_PATHS=(
-  # map list of directories. The key will be the name used on env name of o each item
-  # All paths will be relative do $HOME
-  # Example line:
-  # [NAME]="path/from/home"
-)
-
-function set_paths_env() {
-    local s='$'
-	for KEY in ${!WORK_PATHS[@]}; do
-		local value_from_env=$(printenv "$KEY")
-        local work_path=${WORK_PATHS[$KEY]}
-        if [ "$value_from_env" != "$HOME/$work_path" ]
-			then echo "export $KEY=${s}HOME/${WORK_PATHS[$KEY]}" >> "$HOME/.zshrc"
-		fi
-	done
-}
+source WORK_PATHS.sh
 
 function print_line () {
     printf " +"
@@ -64,55 +47,55 @@ function render_options() {
     done
 }
 
-set_paths_env ;
+function workdir() {
+    shift
+    shift
+    cur=0
+    count=${#WORK_PATHS[@]}
 
-shift
-shift
-cur=0
-count=${#WORK_PATHS[@]}
+    while true
+    do
+        tput clear ;
+        # its worh a lite edition?
+        screen_top ;
 
-while true
-do
-    tput clear ;
-    # its worh a lite edition?
-    screen_top ;
+        render_options ;
+        read -s -n 1 key # wait for user to key in arrows or ENTER
 
-    render_options ;
-    read -s -n 1 key # wait for user to key in arrows or ENTER
+        if [[ $key == "w" || $key == "A" ]] # up arrow
+        then cur=$(( $cur - 1 ))
+            [ "$cur" -lt 0 ] && cur=0
+        elif [[ $key == "s" || $key == "B" ]] # down arrow
+        then cur=$(( $cur + 1 ))
+            [ "$cur" -ge $count ] && cur=$(( $count - 1 ))
+        elif [[ $key == "" ]] # nothing, i.e the read delimiter - ENTER
+        then break
+        fi
+    done
 
-    if [[ $key == "w" || $key == "A" ]] # up arrow
-    then cur=$(( $cur - 1 ))
-        [ "$cur" -lt 0 ] && cur=0
-    elif [[ $key == "s" || $key == "B" ]] # down arrow
-    then cur=$(( $cur + 1 ))
-        [ "$cur" -ge $count ] && cur=$(( $count - 1 ))
-    elif [[ $key == "" ]] # nothing, i.e the read delimiter - ENTER
-    then break
-    fi
-done
+    cd "${HOME}/${WORK_PATHS[$selected]}"
 
-cd "${HOME}/${WORK_PATHS[$selected]}"
-
-if [[ -f "$NVM_DIR/nvm.sh" ]]
-    then source $NVM_DIR/nvm.sh
-    else exit "Missing dependence: NVM"
-fi
-
-code .
-
-if [[ -f "package.json" ]] #:/
-then
-    if [[ -f ".nvmrc" ]]
-        then echo "using .nvmrc" && nvm use
-        else echo "'.nvmrc' not found, using LTS" && nvm use --lts
+    if [[ -f "$NVM_DIR/nvm.sh" ]]
+        then source $NVM_DIR/nvm.sh
+        else exit "Missing dependence: NVM"
     fi
 
-    if [[ -d "node_modules" ]]
-        then echo "node_modules alredy installed, running dev server"
-        else echo "Downloading node_modules..." && npx yarn
+    code .
+
+    if [[ -f "package.json" ]] #:/
+    then
+        if [[ -f ".nvmrc" ]]
+            then echo "using .nvmrc" && nvm use
+            else echo "'.nvmrc' not found, using LTS" && nvm use --lts
+        fi
+
+        if [[ -d "node_modules" ]]
+            then echo "node_modules alredy installed, running dev server"
+            else echo "Downloading node_modules..." && npx yarn
+        fi
+
+        npx yarn dev
+
+    else echo "Not on a node project"
     fi
-
-    npx yarn dev
-
-else echo "Not on a node project"
-fi
+}
