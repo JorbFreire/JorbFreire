@@ -4,7 +4,7 @@ source WORK_PATHS.sh
 DIR_LIST_FILE="$TOOLING_DIR/WORK_PATHS.sh"
 
 function set_paths_env() {
-    local s='$'
+  local s='$'
   for KEY in ${!WORK_PATHS[@]}; do
     local value_from_env=$(printenv "$KEY")
         local work_path=${WORK_PATHS[$KEY]}
@@ -16,8 +16,10 @@ function set_paths_env() {
 
 function saveDir() {
   file=$(cat $DIR_LIST_FILE)
-  secondString="  [$1]=$2\n)"
-  printf "${file/)/"$secondString"}" > "$DIR_LIST_FILE"
+  newPath=$2
+  newPath="${newPath/$HOME'/'/""}"
+  newPath="  [$1]=$newPath\n)"
+  printf "${file/)/"$newPath"}" > "$DIR_LIST_FILE"
 }
 
 function newWorkDir() {
