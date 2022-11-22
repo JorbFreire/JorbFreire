@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-source WORK_PATHS.sh
+source $TOOLING_DIR/WORK_PATHS.sh
 
 function print_line () {
     printf " +"

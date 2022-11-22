@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-source WORK_PATHS.sh
+source $TOOLING_DIR/WORK_PATHS.sh
 
 DIR_LIST_FILE="$TOOLING_DIR/WORK_PATHS.sh"
 

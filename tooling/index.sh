@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-source newWorkDir.sh
-source workdir.sh
+source $TOOLING_DIR/newWorkDir.sh
+source $TOOLING_DIR/workdir.sh
 
 if [[ $# < 1 ]]
   then workdir
