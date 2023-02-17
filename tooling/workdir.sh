@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 source $TOOLING_DIR/WORK_PATHS.sh
+source $TOOLING_DIR/WORK_PATHS_INDEX.sh
+
+DIR_LIST_FILE="$TOOLING_DIR/WORK_PATHS.sh"
+DIR_LIST_INDEX_FILE="$TOOLING_DIR/WORK_PATHS_INDEX.sh"
+
 
 function print_line () {
     printf " +"
@@ -35,6 +40,7 @@ selected=""
 
 function render_options() {
     index=0
+
     for o in "${!WORK_PATHS[@]}"
     do
         if [[ "$index" == "$cur" ]]
@@ -47,7 +53,7 @@ function render_options() {
     done
 }
 
-function workdir() {
+function open_menu() {
     shift
     shift
     cur=0
@@ -72,6 +78,10 @@ function workdir() {
         then break
         fi
     done
+}
+
+function workdir() {
+    open_menu ;
 
     cd "${HOME}/${WORK_PATHS[$selected]}"
 
@@ -98,4 +108,12 @@ function workdir() {
 
     else echo "Not on a node project"
     fi
+}
+
+function delete_option() {
+    open_menu ;
+    line=$(( ${WORK_PATHS_INDEX[$selected]} + 7 ))
+    printf "\n$line"
+    sed -i "${line}d" "$DIR_LIST_FILE"
+    sed -i "${line}d" "$DIR_LIST_INDEX_FILE"
 }

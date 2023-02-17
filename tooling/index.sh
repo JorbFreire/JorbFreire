@@ -12,5 +12,9 @@ elif [[ $1 == "new" ]]
   then
     printf "Creating new folder option.\n"
     newWorkDir "${@:2}"
+elif [[ $1 == "delete" ]]
+  then
+    printf "Deleting folder option.\n"
+    delete_option "${DIR_LIST_FILE}";
 else printf "Unkonw option.\n"
 fi
