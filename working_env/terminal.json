@@ -24,6 +24,14 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
+        },
+        {
+            "command": {
+                "action": "newTab",
+                "index": 1,
+                "commandline": "wsl.exe -d Ubuntu ; exit"
+            },
+            "keys": "ctrl+r"
         }
     ],
     "copyFormatting": "none",
@@ -38,15 +46,16 @@
             "colorScheme": "Dracula",
             "font": {
                 "face": "Fira Code",
-                "size": 15
+                "size": 15.0
             }
         },
         "list": [
             {
                 "colorScheme": "Campbell Powershell",
+                "elevate": true,
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "PowerShell"
             },
             {
                 "colorScheme": "Campbell",
@@ -56,12 +65,13 @@
             },
             {
                 "backgroundImage": "https://raw.githubusercontent.com/dracula/wallpaper/master/ubuntu-1.png",
-                "backgroundImageOpacity": 0.40000000000000002,
+                "backgroundImageOpacity": 0.4,
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "icon": "https://ubuntu-pt.org/wp-content/uploads/2016/10/ubuntu-logo32.png",
                 "name": "Ubuntu-20.04",
                 "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl.exe -d Ubuntu",
                 "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\jorb\\code"
             },
             {
@@ -303,5 +313,7 @@
             "white": "#C0C0C0",
             "yellow": "#808000"
         }
-    ]
+    ],
+    "tabSwitcherMode": "mru",
+    "themes": []
 }
