@@ -17,5 +17,6 @@ function try_python() {
   python3 -m pip install -r requirements.txt
 
   if [[ "$1" == "flask" ]]
-    flask run
+    then flask run
+  fi
 }
