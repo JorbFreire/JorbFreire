@@ -1,6 +1,16 @@
 #!/usr/bin/bash
 source $TOOLING_DIR/src/scripts/try_node.sh
+source $TOOLING_DIR/src/scripts/try_python.sh
 
 cd "$1"
 
-try_node
+
+if [[ -f "package.json" ]] #:/
+    then try_node
+    else echo "Not on a node project"
+fi
+
+if [[ -f "requirements.txt" ]] #:/
+    then try_python "$2"
+    else echo "Not on a python project"
+fi

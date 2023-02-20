@@ -6,20 +6,15 @@ function try_node() {
 
     code .
 
-    if [[ -f "package.json" ]] #:/
-    then
-        if [[ -f ".nvmrc" ]]
-            then echo "using .nvmrc" && nvm use
-            else echo "'.nvmrc' not found, using LTS" && nvm use --lts
-        fi
-
-        if [[ -d "node_modules" ]]
-            then echo "node_modules alredy installed, running dev server"
-            else echo "Downloading node_modules..." && npx yarn
-        fi
-
-        npx yarn dev
-
-    else echo "Not on a node project"
+    if [[ -f ".nvmrc" ]]
+        then echo "using .nvmrc" && nvm use
+        else echo "'.nvmrc' not found, using LTS" && nvm use --lts
     fi
+
+    if [[ -d "node_modules" ]]
+        then echo "node_modules alredy installed, running dev server"
+        else echo "Downloading node_modules..." && npx yarn
+    fi
+
+    npx yarn dev
 }
