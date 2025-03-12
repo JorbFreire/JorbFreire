@@ -7,15 +7,9 @@
         cmd = "'' "
         trustExitCode = true
 [alias]
-  rollback = "!f() { \
-    [ -z \"$1\" ] && echo "reverting last local commit..." && git reset --soft H>    echo "reverting last $1 local commits..."; \
-    git reset --soft HEAD~$1; \
-  }; \
-  f"
-
-  cb="git checkout -b"
+  cb="checkout -b"
   bc="cb"
-  up="git push --set-upstream origin"
+  up="push --set-upstream origin"
 
   rb="rollback"
   undo="rollback"
