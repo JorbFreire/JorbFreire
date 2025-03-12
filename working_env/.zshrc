@@ -1,34 +1,33 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$HOME/.local/bin:$PATH"
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+export CWPROOT='/home/jorb/SeismicUnix'
+export PATH="${PATH}:${CWPROOT}/bin"
 
 # environment variables
 export SUBLPATH="/mnt/c/Program\ Files/Sublime\ Text/sublime_text.exe"
-export VSCODEPATH="/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
-export SRCDIRASREMOTE="//wsl$/Ubuntu/home/$USER/.zshrc"
+export SRCDIRASREMOTE="//wsl$/Debian/home/$USER/.zshrc"
 
 # aliases
 alias mkdir="mkdir -v"
 alias rmdir="rmdir -v"
-alias python="python3"
-alias py="python3"
-alias pip='f() {if [ "$1" = "add" ]; then pip install ${@:2}; else pip $@; fi;}; f'
+alias rm="trash-put"
 
-alias code="$VSCODEPATH"
+# alias python="python3"
+alias py="python"
+alias pip='f() {if [ "$1" = "add" ]; then pip install ${@:2}; else pip $@; fi;}; f'
 alias subl="$SUBLPATH"
 
+alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
 alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
 alias reload="source ~/.zshrc"
 alias RELOAD="source ~/.zshrc"
 
-alias view="wslview"
-alias display="wslview"
-alias show="wslview"
-
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="spaceship"
@@ -93,7 +92,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,16 +107,15 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -131,7 +129,6 @@ SPACESHIP_PROMPT_ORDER=(
   hg            # Mercurial section (hg_branch  + hg_status)
   exec_time     # Execution time
   line_sep      # Line break
-  vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character
@@ -140,6 +137,7 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
+
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -169,8 +167,8 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+. "$HOME/.asdf/asdf.sh"
