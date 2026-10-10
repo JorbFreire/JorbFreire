@@ -1,15 +1,8 @@
 [user]
-        email = *@*
-        name = *
-[difftool "sourcetree"]
-        cmd = '' \"\" \"\"
-[mergetool "sourcetree"]
-        cmd = "'' "
-        trustExitCode = true
-[alias]
-  cb="checkout -b"
-  bc="cb"
-  up="push --set-upstream origin"
-
-  rb="rollback"
-  undo="rollback"
+        name = JorbFreire
+        email = jorbfreire@gmail.com
+[filter "lfs"]
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true

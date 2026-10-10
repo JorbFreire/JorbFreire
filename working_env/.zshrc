@@ -13,13 +13,12 @@ alias mkdir="mkdir -v"
 alias rmdir="rmdir -v"
 alias rm="trash-put"
 
-# alias python="python3"
+alias python="python3"
 alias py="python"
-alias pip='f() {if [ "$1" = "add" ]; then pip install ${@:2}; else pip $@; fi;}; f'
 alias subl="$SUBLPATH"
 
-alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
-alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE; else nano ~/.zshrc; fi;"
+alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE &; else nano ~/.zshrc; fi;"
+alias envedit="if [ -f $SUBLPATH ]; then subl $SRCDIRASREMOTE &; else nano ~/.zshrc; fi;"
 alias reload="source ~/.zshrc"
 alias RELOAD="source ~/.zshrc"
 
@@ -92,7 +91,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git asdf)
+plugins=(git python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,6 +115,10 @@ source $ZSH/oh-my-zsh.sh
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
 # users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -126,7 +129,7 @@ SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   host          # Hostname section
   git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
+  venv           
   exec_time     # Execution time
   line_sep      # Line break
   jobs          # Background jobs indicator
@@ -137,7 +140,6 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -171,4 +173,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-. "$HOME/.asdf/asdf.sh"
+export CWPROOT='/home/jorb/SeismicUnix'
+export PATH="${PATH}:${CWPROOT}/bin"
